@@ -1,0 +1,25 @@
+/* General body style */
+body {
+    background-color: white; /* Default background */
+}
+
+/* Ensure buttons have a consistent style */
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode a, .dark-mode .theme-colored, .dark-mode .button, .dark-mode .navbar, .dark-mode .sidebar, .dark-mode .highlight, .dark-mode .panel-header {
+    color: inherit !important; /* Use inherited color */
+    background-color: inherit !important; /* Use inherited background */
+    border-color: inherit !important; /* Use inherited border color */
+}

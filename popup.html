@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Piazza Enhancer Settings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, input[type="color"], button {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <h1>Piazza Enhancer</h1>
+    <label for="fontStyle">Font Style:</label>
+    <select id="fontStyle">
+        <option value="default">Default</option>
+        <option value="comicSans">Comic Sans</option>
+    </select>
+
+    <label for="themeColor">Theme Color:</label>
+    <input type="color" id="themeColor" value="#0056b3">
+
+    <label for="darkModeToggle">Dark Mode:</label>
+    <input type="checkbox" id="darkModeToggle">
+
+    <button id="saveBtn">Save Settings</button>
+
+    <script src="popup.js"></script>
+</body>
+</html>

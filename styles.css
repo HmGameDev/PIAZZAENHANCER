@@ -1,25 +1,58 @@
-/* General body style */
-body {
-    background-color: white; /* Default background */
+/* Modern, Minimalistic Look for Piazza */
+body, html {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+    overflow-x: hidden;
+    transition: background 0.3s ease;
 }
 
-/* Ensure buttons have a consistent style */
-button {
-    background-color: #0056b3;
-    color: white;
+/* Smooth animations */
+* {
+    transition: all 0.3s ease;
+}
+
+.main-content {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border-radius: 8px;
+}
+
+/* Button and link styling */
+button, a {
+    background: #0073e6;
+    color: #fff;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
+    font-size: 14px;
+}
+button:hover, a:hover {
+    background: #005bb5;
 }
 
-/* Dark mode styles */
-.dark-mode {
-    background-color: #121212;
-    color: white;
+/* Animation for page transitions */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
 }
 
-.dark-mode a, .dark-mode .theme-colored, .dark-mode .button, .dark-mode .navbar, .dark-mode .sidebar, .dark-mode .highlight, .dark-mode .panel-header {
-    color: inherit !important; /* Use inherited color */
-    background-color: inherit !important; /* Use inherited background */
-    border-color: inherit !important; /* Use inherited border color */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Add this class to elements that need to animate in */
+.piazza-enhanced {
+    background-color: #f5f7fa;
+    font-size: 1.2rem;
+    padding: 20px;
+    margin-top: 20px;
 }

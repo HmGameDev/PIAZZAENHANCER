@@ -28,10 +28,10 @@ function createSettingsButton() {
     }, 1000); // Check every second
 }
 
-// Apply saved settings
+// Apply saved settings with continuous updating for dynamic content
 function applySettings() {
-    chrome.storage.sync.get(["fontStyle", "themeColor", "darkMode"], ({ fontStyle, themeColor, darkMode }) => {
-        console.log("Applying settings:", { fontStyle, themeColor, darkMode });
+    chrome.storage.sync.get(["fontStyle", "themeColor", "darkMode", "backgroundImage"], ({ fontStyle, themeColor, darkMode, backgroundImage }) => {
+        console.log("Applying settings:", { fontStyle, themeColor, darkMode, backgroundImage });
 
         // Set default values if undefined
         fontStyle = fontStyle || "default";
@@ -39,22 +39,25 @@ function applySettings() {
         darkMode = darkMode !== undefined ? darkMode : false; // Default to false
 
         // Apply font globally
-        const body = document.body;
-        body.style.fontFamily = fontStyle === "comicSans" ? "'Comic Sans MS', sans-serif" : "inherit";
+        document.body.style.fontFamily = fontStyle === "comicSans" ? "'Comic Sans MS', sans-serif" : "inherit";
+
+        // Background image application
+        if (backgroundImage) {
+            document.body.style.backgroundImage = `url(${backgroundImage})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+        }
 
         // Apply theme color and text visibility
-        const elements = document.querySelectorAll('*');
-        elements.forEach(element => {
-            if (darkMode) {
-                element.style.color = 'white'; // Text color for dark mode
-                element.style.backgroundColor = '#121212'; // Background color for dark mode
-            } else {
-                element.style.color = 'black'; // Text color for light mode
-                element.style.backgroundColor = 'white'; // Background color for light mode
-            }
-            element.style.borderColor = themeColor; // Change border color if applicable
-        });
-
+        function applyStyles() {
+            const elements = document.querySelectorAll('*');
+            elements.forEach(element => {
+                element.style.color = darkMode ? 'white' : 'black';
+                element.style.backgroundColor = darkMode ? '#121212' : 'white';
+                element.style.borderColor = themeColor;
+            });
+        }
+        
         // Apply dark mode styles
         if (darkMode) {
             document.body.classList.add('dark-mode');
@@ -63,6 +66,19 @@ function applySettings() {
             document.body.classList.remove('dark-mode');
             console.log("Dark mode disabled.");
         }
+
+        applyStyles(); // Initial application of styles
+
+        // Observer to apply settings as new Q&A content loads
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    applyStyles();
+                }
+            });
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
     });
 }
 
